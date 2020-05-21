@@ -69,6 +69,12 @@ export const constantRoutes = [
         meta: { title: 'Table', icon: 'table' }
       },
       {
+        path: 'table/house',
+        name: 'House',
+        component: () => import('@/views/table/house'),
+        meta: {title: 'House', icon: 'table'}
+      },
+      {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
@@ -153,7 +159,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
+        path: 'https://www.google.com',
         meta: { title: 'External Link', icon: 'link' }
       }
     ]

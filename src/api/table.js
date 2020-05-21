@@ -7,3 +7,11 @@ export function getList(params) {
     params
   })
 }
+
+export function getRentingHouse(params) {
+  return request({
+    url: '/house/rentingHouse/list',
+    method: 'get',
+    params
+  })
+}

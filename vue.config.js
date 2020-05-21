@@ -36,7 +36,17 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: require('./mock/mock-server.js')
+    before: require('./mock/mock-server.js'),
+    //如果后端实现cors，则无需使用proxy跨域
+    proxy: {
+      '/dev-api': {
+        target: 'http://127.0.0.1:8080/',//设置你调用的接口域名和端口号
+        changeOrigin: true,  //跨域
+        pathRewrite: {
+          '^/dev-api': '/' //用target替换本地的nodejs路径
+        }
+      }
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
