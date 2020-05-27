@@ -56,29 +56,41 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/house',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    redirect: '/house/secondHandHouse',
+    name: '二手房',
+    meta: { title: '二手房', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'table/secondHandHouse',
+        name: '二手房列表',
+        component: () => import('@/views/table/secondHandHouse'),
+        meta: {title: '二手房列表', icon: 'table'}
       },
       {
-        path: 'table/house',
-        name: 'House',
-        component: () => import('@/views/table/house'),
-        meta: {title: 'House', icon: 'table'}
+        path: 'table/secondHandHouseSummary',
+        name: '二手房汇总',
+        component: () => import('@/views/table/secondHandHouseSummary'),
+        meta: {title: '二手房汇总', icon: 'table'}
+      },
+      {
+        path: 'table/spider',
+        name: '爬虫状态',
+        component: () => import('@/views/table/spider'),
+        meta: {title: '爬虫状态', icon: 'table'}
       },
       {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: { title: 'Tree', icon: 'tree' }
+      },
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Table', icon: 'table' }
       }
     ]
   },

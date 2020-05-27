@@ -8,10 +8,25 @@ export function getList(params) {
   })
 }
 
-export function getRentingHouse(params) {
+export function getSecondHandHouse(params) {
   return request({
-    url: '/house/rentingHouse/list',
+    url: '/house/secondHandHouse/list',
     method: 'get',
     params
+  })
+}
+
+export function getSecondHandHouseSummary(params) {
+  return request({
+    url: '/house/secondHandHouse/summary/list',
+    method: 'get',
+    params
+  })
+}
+
+export function getSecondHandHouseSpider() {
+  return request({
+    url: '/house/crawler/secondHandHouse/status',
+    method: 'get'
   })
 }
