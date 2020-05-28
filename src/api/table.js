@@ -24,6 +24,13 @@ export function getSecondHandHouseSummary(params) {
   })
 }
 
+export function getDistrictSecondHandHouseSummary() {
+  return request({
+    url: '/house/secondHandHouse/summary/range',
+    method: 'get'
+  })
+}
+
 export function getSecondHandHouseSpider() {
   return request({
     url: '/house/crawler/secondHandHouse/status',
