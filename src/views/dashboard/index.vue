@@ -1,7 +1,9 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">Hello: {{ name }}</div>
-    <div id="main" style="width: 1200px;height:600px;"></div>
+    <div id="chart1" position="relative" style="width: 1000px;height:500px;"></div>
+    <div id="chart2" position="relative" style="width: 1000px;height:500px;"></div>
+    <div id="chart3" position="relative" style="width: 1000px;height:500px;"></div>
   </div>
 </template>
 
@@ -9,6 +11,10 @@
 import { mapGetters } from 'vuex'
 import { getDistrictSecondHandHouseSummary } from '@/api/table'
 import { formatDate } from '@/utils/date'
+import { assembleAvgUnitPriceOption } from '@/utils/echartsutils'
+import { assembleAvgTotalPriceOption } from '@/utils/echartsutils'
+import { assembleTotalHouseOption } from '@/utils/echartsutils'
+
 var echarts = require('echarts');
 
 export default {
@@ -20,52 +26,9 @@ export default {
   },
   data() {
     return {
-      option: {
-        title: {
-          text: '上海平均房价',
-        },
-        tooltip: {
-          trigger: 'axis'
-        },
-        legend: {
-          data: []
-        },
-        toolbox: {
-          show: true,
-          feature: {
-            dataZoom: {
-              yAxisIndex: 'none'
-            },
-            dataView: {readOnly: false},
-            magicType: {type: ['line', 'bar']},
-            restore: {},
-            saveAsImage: {}
-          }
-        },
-        xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: []
-        },
-        yAxis: {
-          type: 'value',
-          axisLabel: {
-            formatter: '{value} 元/平米'
-          }
-        },
-        series: [
-          {
-            name: '行政区1',
-            type: 'line',
-            data: [11, 44 , 12],
-            markLine: {
-              data: [
-                {type: 'average', name: '平均值'}
-              ]
-            }
-          }
-        ]
-      }
+      avgUnitPriceOption: {},
+      avgTotalPriceOption: {},
+      avgTotalHouseOption: {}
     }
   },
   methods: {
@@ -73,35 +36,49 @@ export default {
       getDistrictSecondHandHouseSummary().then(response => {
         let result = response.result;
         let dataX = [];
-        for(let i = 0;i<result.timeList.length;i++){
+        for (let i = 0; i < result.timeList.length; i++) {
           dataX.push(formatDate(result.timeList[i]));
         }
-        this.option.xAxis.data = dataX;
-        let group = result.districts;
-        this.option.legend.data = group;
-        let avgUnitPriceY = [];
+        let legend = result.districts;
+
+        let avgUnitPriceY = {};
         for (let key in result.sumMap) {
-          let line = {};
-          line.name = key;
-          line.type = 'line';
-          line.markLine = {
-            data: [
-              {type: 'average', name: '平均值'},
-            ]
-          };
-          line.data = [];
+          avgUnitPriceY[key] = [];
           for (let i = 0; i < result.sumMap[key].length; i++) {
             let node = result.sumMap[key][i];
-            line.data.push(node.avgUnitPrice)
+            avgUnitPriceY[key].push(node.avgUnitPrice);
           }
-          avgUnitPriceY.push(line);
         }
-        this.option.series = avgUnitPriceY;
+        this.avgUnitPriceOption = assembleAvgUnitPriceOption(dataX, legend, avgUnitPriceY);
+
+        let avgTotalPriceY = {};
+        for (let key in result.sumMap) {
+          avgTotalPriceY[key] = [];
+          for (let i = 0; i < result.sumMap[key].length; i++) {
+            let node = result.sumMap[key][i];
+            avgTotalPriceY[key].push(node.avgTotalPrice);
+          }
+        }
+        this.avgTotalPriceOption = assembleAvgTotalPriceOption(dataX, legend, avgTotalPriceY);
+
+        let totalHouseY = {};
+        for (let key in result.sumMap) {
+          totalHouseY[key] = [];
+          for (let i = 0; i < result.sumMap[key].length; i++) {
+            let node = result.sumMap[key][i];
+            totalHouseY[key].push(node.totalHouseCount);
+          }
+        }
+        this.avgTotalHouseOption = assembleTotalHouseOption(dataX, legend, totalHouseY);
+
+
         this.drawChart();
       });
     },
     drawChart() {
-      let mychart = echarts.init(document.getElementById("main")).setOption(this.option);
+      let mychart1 = echarts.init(document.getElementById("chart1")).setOption(this.avgUnitPriceOption);
+      let mychart2 = echarts.init(document.getElementById("chart2")).setOption(this.avgTotalPriceOption);
+      let mychart3 = echarts.init(document.getElementById("chart3")).setOption(this.avgTotalHouseOption);
     }
   },
   mounted() {
