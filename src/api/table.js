@@ -37,3 +37,10 @@ export function getSecondHandHouseSpider() {
     method: 'get'
   })
 }
+
+export function getAllDistricts() {
+  return request({
+    url: '/house/secondHandHouse/districts',
+    method: 'get'
+  })
+}

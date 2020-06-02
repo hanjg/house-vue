@@ -56,41 +56,29 @@ export const constantRoutes = [
   },
 
   {
-    path: '/house',
+    path: '/table',
     component: Layout,
-    redirect: '/house/secondHandHouse',
-    name: '二手房',
-    meta: { title: '二手房', icon: 'example' },
+    redirect: '/table/secondHandHouse',
+    name: '二手房列表',
+    meta: { title: '二手房列表', icon: 'example' },
     children: [
       {
         path: 'table/secondHandHouse',
-        name: '二手房列表',
+        name: '房源列表',
         component: () => import('@/views/table/secondHandHouse'),
-        meta: {title: '二手房列表', icon: 'table'}
+        meta: {title: '房源列表', icon: 'table'}
       },
       {
         path: 'table/secondHandHouseSummary',
-        name: '二手房汇总',
+        name: '行政区汇总',
         component: () => import('@/views/table/secondHandHouseSummary'),
-        meta: {title: '二手房汇总', icon: 'table'}
+        meta: {title: '行政区汇总', icon: 'table'}
       },
       {
         path: 'table/spider',
         name: '爬虫状态',
         component: () => import('@/views/table/spider'),
         meta: {title: '爬虫状态', icon: 'table'}
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      },
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
       }
     ]
   },
@@ -98,70 +86,15 @@ export const constantRoutes = [
   {
     path: '/form',
     component: Layout,
+    redirect: '/form/secondHandHouseSummary',
+    name: '二手房查询',
+    meta: {title: '二手房查询', icon: 'example'},
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
+        path: 'form/secondHandHouseSummary',
+        name: '查询行政区汇总',
+        component: () => import('@/views/form/secondHandHouseSummary'),
+        meta: {title: '查询行政区汇总', icon: 'form'}
       }
     ]
   },
@@ -171,8 +104,8 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://www.google.com',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'https://sh.lianjia.com/ershoufang/',
+        meta: { title: '链家网', icon: 'link' }
       }
     ]
   },
