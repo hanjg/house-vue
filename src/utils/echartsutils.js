@@ -128,7 +128,8 @@ var optionTemplate = {
     type: 'value',
     axisLabel: {
       formatter: '{value}'
-    }
+    },
+    scale:true,
   },
   series: [
     {
