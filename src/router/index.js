@@ -70,9 +70,9 @@ export const constantRoutes = [
       },
       {
         path: 'table/secondHandHouseSummary',
-        name: '行政区汇总',
+        name: '行政区汇总列表',
         component: () => import('@/views/table/secondHandHouseSummary'),
-        meta: {title: '行政区汇总', icon: 'table'}
+        meta: {title: '行政区汇总列表', icon: 'table'}
       },
       {
         path: 'table/spider',
@@ -92,9 +92,9 @@ export const constantRoutes = [
     children: [
       {
         path: 'form/secondHandHouseSummary',
-        name: '查询行政区汇总',
+        name: '行政区汇总曲线',
         component: () => import('@/views/form/secondHandHouseSummary'),
-        meta: {title: '查询行政区汇总', icon: 'form'}
+        meta: {title: '行政区汇总曲线', icon: 'form'}
       }
     ]
   },
